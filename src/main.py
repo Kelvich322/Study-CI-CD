@@ -1,7 +1,7 @@
 from typing import Dict, List
 
 from fastapi import FastAPI, HTTPException, Path, status, Depends
-from sqlalchemy import asc, desc
+from sqlalchemy import Sequence, asc, desc
 from sqlalchemy.future import select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -24,7 +24,7 @@ async def shutdown():
 
 
 @app.get("/recipes/", response_model=List[schemas.RecipeLite])
-async def recipes(db: AsyncSession = Depends(get_db)) -> List[models.Recipe]:
+async def recipes(db: AsyncSession = Depends(get_db)) -> Sequence[models.Recipe]:
     res = await db.execute(
         select(models.Recipe).order_by(
             desc(models.Recipe.views), asc(models.Recipe.cook_time)
@@ -71,6 +71,3 @@ async def add_recipe(
     db.add(new_recipe)
     await db.commit()
     return new_recipe
-
-def func_for_test_pipeline():
-    pass
