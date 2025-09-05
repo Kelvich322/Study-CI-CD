@@ -71,3 +71,6 @@ async def add_recipe(
     db.add(new_recipe)
     await db.commit()
     return new_recipe
+
+def func_for_test_pipeline():
+    pass
