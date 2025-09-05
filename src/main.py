@@ -1,7 +1,7 @@
-from typing import Dict, List
+from typing import Dict, List, Sequence
 
 from fastapi import FastAPI, HTTPException, Path, status, Depends
-from sqlalchemy import Sequence, asc, desc
+from sqlalchemy import asc, desc
 from sqlalchemy.future import select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
