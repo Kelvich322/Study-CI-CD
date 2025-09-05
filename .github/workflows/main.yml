@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
-      - run: pip install mypy
+      - run: pip install -r requirements.txt
       - run: mypy src/
 
   black:
@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
-      - run: pip install black
+      - run: pip install -r requirements.txt
       - run: black --check --diff src/
 
   isort:
@@ -35,5 +35,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
-      - run: pip install isort
+      - run: pip install -r requirements.txt
       - run: isort --check-only --diff src/
