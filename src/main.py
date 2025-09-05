@@ -1,10 +1,10 @@
 from typing import Dict, List, Sequence
 
-from fastapi import FastAPI, HTTPException, Path, status, Depends
+from fastapi import Depends, FastAPI, HTTPException, Path, status
 from sqlalchemy import asc, desc
-from sqlalchemy.future import select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 
 from . import models, schemas
 from .database import engine, get_db
@@ -54,7 +54,7 @@ async def recipe(
             select(models.Recipe).filter(models.Recipe.id == id).with_for_update()
         )
         recipe = res.scalars().one()
-        recipe.views += 1 # type: ignore
+        recipe.views += 1  # type: ignore
         await db.commit()
         return recipe
     except NoResultFound:
