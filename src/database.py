@@ -7,8 +7,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE_URL = f"sqlite+aiosqlite:///{os.path.join(BASE_DIR, 'app.db')}"
 
 engine = create_async_engine(DATABASE_URL)
-async_session: sessionmaker[Session] = sessionmaker(
-    engine, expire_on_commit=False, class_=AsyncSession
+async_session = sessionmaker(
+    engine, class_=AsyncSession, expire_on_commit=False
 )
 Base = declarative_base()
 

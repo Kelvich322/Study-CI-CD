@@ -54,7 +54,7 @@ async def recipe(
             select(models.Recipe).filter(models.Recipe.id == id).with_for_update()
         )
         recipe = res.scalars().one()
-        recipe.views += 1
+        recipe.views = recipe.views + 1
         await db.commit()
         return recipe
     except NoResultFound:
